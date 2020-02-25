@@ -13,8 +13,6 @@ import java.util.List;
 @RequestMapping("/administrator")
 public class AdministratorController {
 
-
-
     @GetMapping("/login")
     public String login(
             AdministratorLoginInDTO administratorLoginInDTO
