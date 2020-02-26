@@ -22,16 +22,24 @@ public class ProductController {
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(
             ProductSearchInDTO productSearchInDTO,
-            @RequestParam Integer pageNum
+            @RequestParam(required = false, defaultValue = "1") Integer pageNum
     ){
-        return null;
+        Page<ProductListOutDTO> page = productService.search(pageNum);
+        PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(page);
+
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")
     public ProductShowOutDTO getById(
             @RequestParam Integer productId
     ){
-        return null;
+        ProductShowOutDTO productShowOutDTO = productService.getById(productId);
+        return productShowOutDTO;
     }
 
     @PostMapping("/create")
@@ -46,6 +54,6 @@ public class ProductController {
     public void update(
             @RequestBody ProductUpdateInDTO productUpdateInDTO
     ){
-
+        productService.update(productUpdateInDTO);
     }
 }

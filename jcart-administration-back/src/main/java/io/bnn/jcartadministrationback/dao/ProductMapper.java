@@ -1,5 +1,7 @@
 package io.bnn.jcartadministrationback.dao;
 
+import com.github.pagehelper.Page;
+import io.bnn.jcartadministrationback.dto.out.ProductListOutDTO;
 import io.bnn.jcartadministrationback.po.Product;
 
 public interface ProductMapper {
@@ -14,4 +16,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    Page<ProductListOutDTO> search();
 }
