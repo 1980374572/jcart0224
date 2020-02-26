@@ -3,21 +3,21 @@ package io.bnn.jcartadministrationback.po;
 public class OrderDetail {
     private Long orderId;
 
-    private Short payMethod;
-
-    private String invoiceAddress;
-
-    private Double invoicePrice;
-
     private Short shipMethod;
 
     private String shipAddress;
 
     private Double shipPrice;
 
+    private Short payMethod;
+
+    private String invoiceAddress;
+
+    private Double invoicePrice;
+
     private String comment;
 
-    private String content;
+    private String orderProducts;
 
     public Long getOrderId() {
         return orderId;
@@ -25,30 +25,6 @@ public class OrderDetail {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Short getPayMethod() {
-        return payMethod;
-    }
-
-    public void setPayMethod(Short payMethod) {
-        this.payMethod = payMethod;
-    }
-
-    public String getInvoiceAddress() {
-        return invoiceAddress;
-    }
-
-    public void setInvoiceAddress(String invoiceAddress) {
-        this.invoiceAddress = invoiceAddress == null ? null : invoiceAddress.trim();
-    }
-
-    public Double getInvoicePrice() {
-        return invoicePrice;
-    }
-
-    public void setInvoicePrice(Double invoicePrice) {
-        this.invoicePrice = invoicePrice;
     }
 
     public Short getShipMethod() {
@@ -75,6 +51,30 @@ public class OrderDetail {
         this.shipPrice = shipPrice;
     }
 
+    public Short getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(Short payMethod) {
+        this.payMethod = payMethod;
+    }
+
+    public String getInvoiceAddress() {
+        return invoiceAddress;
+    }
+
+    public void setInvoiceAddress(String invoiceAddress) {
+        this.invoiceAddress = invoiceAddress == null ? null : invoiceAddress.trim();
+    }
+
+    public Double getInvoicePrice() {
+        return invoicePrice;
+    }
+
+    public void setInvoicePrice(Double invoicePrice) {
+        this.invoicePrice = invoicePrice;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -83,11 +83,11 @@ public class OrderDetail {
         this.comment = comment == null ? null : comment.trim();
     }
 
-    public String getContent() {
-        return content;
+    public String getOrderProducts() {
+        return orderProducts;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setOrderProducts(String orderProducts) {
+        this.orderProducts = orderProducts == null ? null : orderProducts.trim();
     }
 }

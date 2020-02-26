@@ -19,7 +19,7 @@ public class Return {
 
     private Byte status;
 
-    private Byte returnAction;
+    private Byte action;
 
     private String productCode;
 
@@ -101,12 +101,12 @@ public class Return {
         this.status = status;
     }
 
-    public Byte getReturnAction() {
-        return returnAction;
+    public Byte getAction() {
+        return action;
     }
 
-    public void setReturnAction(Byte returnAction) {
-        this.returnAction = returnAction;
+    public void setAction(Byte action) {
+        this.action = action;
     }
 
     public String getProductCode() {

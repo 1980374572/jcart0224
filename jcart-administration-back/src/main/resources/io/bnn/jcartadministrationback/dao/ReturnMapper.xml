@@ -10,7 +10,7 @@
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="return_action" jdbcType="TINYINT" property="returnAction" />
+    <result column="action" jdbcType="TINYINT" property="action" />
     <result column="product_code" jdbcType="VARCHAR" property="productCode" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
@@ -22,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     return_id, order_id, order_time, customer_id, customer_name, mobile, email, status, 
-    return_action, product_code, product_name, quantity, reason, opened, comment, create_time, 
+    action, product_code, product_name, quantity, reason, opened, comment, create_time, 
     update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,13 +38,13 @@
   <insert id="insert" parameterType="io.bnn.jcartadministrationback.po.Return">
     insert into jcart_return (return_id, order_id, order_time, 
       customer_id, customer_name, mobile, 
-      email, status, return_action, 
+      email, status, action, 
       product_code, product_name, quantity, 
       reason, opened, comment, 
       create_time, update_time)
     values (#{returnId,jdbcType=INTEGER}, #{orderId,jdbcType=BIGINT}, #{orderTime,jdbcType=TIMESTAMP}, 
       #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{returnAction,jdbcType=TINYINT}, 
+      #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{action,jdbcType=TINYINT}, 
       #{productCode,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{reason,jdbcType=TINYINT}, #{opened,jdbcType=BIT}, #{comment,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
@@ -76,8 +76,8 @@
       <if test="status != null">
         status,
       </if>
-      <if test="returnAction != null">
-        return_action,
+      <if test="action != null">
+        action,
       </if>
       <if test="productCode != null">
         product_code,
@@ -129,8 +129,8 @@
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="returnAction != null">
-        #{returnAction,jdbcType=TINYINT},
+      <if test="action != null">
+        #{action,jdbcType=TINYINT},
       </if>
       <if test="productCode != null">
         #{productCode,jdbcType=VARCHAR},
@@ -182,8 +182,8 @@
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="returnAction != null">
-        return_action = #{returnAction,jdbcType=TINYINT},
+      <if test="action != null">
+        action = #{action,jdbcType=TINYINT},
       </if>
       <if test="productCode != null">
         product_code = #{productCode,jdbcType=VARCHAR},
@@ -221,7 +221,7 @@
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      return_action = #{returnAction,jdbcType=TINYINT},
+      action = #{action,jdbcType=TINYINT},
       product_code = #{productCode,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},
       quantity = #{quantity,jdbcType=INTEGER},

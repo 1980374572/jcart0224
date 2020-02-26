@@ -38,7 +38,7 @@
             <property name="immutable" value="false"/>
         </javaModelGenerator>
 
-        <!--生成映射文件存放位置-->
+<!--        &lt;!&ndash;生成映射文件存放位置&ndash;&gt;-->
         <sqlMapGenerator targetPackage="io.bnn.jcartadministrationback.dao" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
