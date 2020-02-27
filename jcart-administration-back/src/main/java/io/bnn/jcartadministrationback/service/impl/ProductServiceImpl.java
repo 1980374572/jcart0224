@@ -28,6 +28,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductDetailMapper productDetailMapper;
 
     @Override
+    public Page<ProductListOutDTO> search(Integer pageNum) {
+        PageHelper.startPage(pageNum, 10);
+        Page<ProductListOutDTO> page = productMapper.search();
+        return page;
+    }
+
+    @Override
     @Transactional
     public Integer create(ProductCreateInDTO productCreateInDTO) {
 
@@ -42,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
         product.setRewordPoints(productCreateInDTO.getRewordPoints());
         product.setSortOrder(productCreateInDTO.getSortOrder());
         String description = productCreateInDTO.getDescription();
+        //截取字符串
         String productAbstract = description.substring(0, Math.min(100, description.length()));
         product.setProductAbstract(productAbstract);
         productMapper.insertSelective(product);
@@ -57,12 +65,6 @@ public class ProductServiceImpl implements ProductService {
         return productId;
     }
 
-    @Override
-    public Page<ProductListOutDTO> search(Integer pageNum) {
-        PageHelper.startPage(pageNum, 10);
-        Page<ProductListOutDTO> page = productMapper.search();
-        return page;
-    }
 
     @Override
     @Transactional
