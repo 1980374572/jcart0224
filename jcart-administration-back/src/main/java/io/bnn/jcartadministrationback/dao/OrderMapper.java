@@ -1,7 +1,9 @@
 package io.bnn.jcartadministrationback.dao;
 
 import io.bnn.jcartadministrationback.po.Order;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderMapper {
     int deleteByPrimaryKey(Long orderId);
 

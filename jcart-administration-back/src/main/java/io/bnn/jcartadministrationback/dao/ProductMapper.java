@@ -3,7 +3,9 @@ package io.bnn.jcartadministrationback.dao;
 import com.github.pagehelper.Page;
 import io.bnn.jcartadministrationback.dto.out.ProductListOutDTO;
 import io.bnn.jcartadministrationback.po.Product;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productId);
 

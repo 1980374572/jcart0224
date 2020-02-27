@@ -1,7 +1,9 @@
 package io.bnn.jcartadministrationback.dao;
 
 import io.bnn.jcartadministrationback.po.Administrator;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdministratorMapper {
     int deleteByPrimaryKey(Integer administratorId);
 
