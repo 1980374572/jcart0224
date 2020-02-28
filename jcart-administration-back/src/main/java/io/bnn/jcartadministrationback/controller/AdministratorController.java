@@ -1,10 +1,14 @@
 package io.bnn.jcartadministrationback.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import io.bnn.jcartadministrationback.constant.ClientExceptionConstant;
 import io.bnn.jcartadministrationback.dto.in.*;
-import io.bnn.jcartadministrationback.dto.out.AdministratorGetProfileOutDTO;
-import io.bnn.jcartadministrationback.dto.out.AdministratorListOutDTO;
-import io.bnn.jcartadministrationback.dto.out.AdministratorShowOutDTO;
-import io.bnn.jcartadministrationback.dto.out.PageOutDTO;
+import io.bnn.jcartadministrationback.dto.out.*;
+import io.bnn.jcartadministrationback.exception.ClientException;
+import io.bnn.jcartadministrationback.po.Administrator;
+import io.bnn.jcartadministrationback.service.AdministratorService;
+import io.bnn.jcartadministrationback.util.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,11 +18,29 @@ import java.util.List;
 @CrossOrigin
 public class AdministratorController {
 
+    @Autowired
+    AdministratorService administratorService;
+
+    @Autowired
+    private JWTUtil jwtUtil;
+
     @GetMapping("/login")
-    public String login(
+    public AdministratorLoginOutDTO login(
             AdministratorLoginInDTO administratorLoginInDTO
-    ){
-        return null;
+    ) throws ClientException {
+        Administrator administrator = administratorService.getByUsername(administratorLoginInDTO.getUsername());
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRMSG);
+        }
+        String encPwdDB = administrator.getEncryptedPassword();
+        BCrypt.Result result = BCrypt.verifyer().verify(administratorLoginInDTO.getPassword().toCharArray(), encPwdDB);
+
+        if (result.verified) {
+            AdministratorLoginOutDTO administratorLoginOutDTO = jwtUtil.issueToken(administrator);
+            return administratorLoginOutDTO;
+        }else {
+            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRMSG);
+        }
     }
     @GetMapping("/getProfile")
     public AdministratorGetProfileOutDTO getProfile(
@@ -86,6 +108,13 @@ public class AdministratorController {
             @RequestBody List<Integer> administratorIds
     ){
 
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        String password = "123456";
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+        return bcryptHashString;
     }
 
 }

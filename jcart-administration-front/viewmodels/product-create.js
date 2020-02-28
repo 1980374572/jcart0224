@@ -23,7 +23,9 @@ var app = new Vue({
         otherFileList: []
     },
     mounted() {
-        
+        tinymce.init({
+            selector: '#mytextarea'
+        });
     },
     methods: {
         handleOnMainChange(val) {
@@ -88,6 +90,7 @@ var app = new Vue({
             });
         },
         handleCreateClick(){
+            this.description = tinyMCE.activeEditor.getContent();
             this.createProduct();
         },
         createProduct() {

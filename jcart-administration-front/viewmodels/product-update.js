@@ -26,6 +26,10 @@ var app = new Vue({
     mounted() {
         console.log('view mounted');
 
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+
         var url = new URL(location.href);
         this.productId = url.searchParams.get("productId");
 
@@ -33,7 +37,7 @@ var app = new Vue({
             alert('productId 不存在');
             return;
         }
-
+       
         this.getProductById();
     },
     methods: {
@@ -98,10 +102,11 @@ var app = new Vue({
                     });
             });
         },
-        handleCreateClick(){
-            this.createProduct();
+        handleUpdateClick(){
+            this.description = tinyMCE.activeEditor.getContent();
+            this.updateProduct();
         },
-        createProduct() {
+        updateProduct() {
             axios.post('/product/update', {
                 productId: this.productId,
                 productName: this.productName,
@@ -117,12 +122,12 @@ var app = new Vue({
             })
                 .then(function (response) {
                     console.log(response);
-                    alert('创建成功');
+                    alert('修改成功');
                     location.href = 'product-search.html';
                 })
                 .catch(function (error) {
                     console.log(error);
-                    alert('创建失败');
+                    alert('修改失败');
                 });
         },
         getProductById() {

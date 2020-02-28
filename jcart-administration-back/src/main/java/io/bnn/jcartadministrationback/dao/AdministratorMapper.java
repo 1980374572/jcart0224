@@ -1,5 +1,6 @@
 package io.bnn.jcartadministrationback.dao;
 
+import io.bnn.jcartadministrationback.dto.in.AdministratorLoginInDTO;
 import io.bnn.jcartadministrationback.po.Administrator;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface AdministratorMapper {
     int updateByPrimaryKeySelective(Administrator record);
 
     int updateByPrimaryKey(Administrator record);
+
+    Administrator getByUsername(String username);
 }
