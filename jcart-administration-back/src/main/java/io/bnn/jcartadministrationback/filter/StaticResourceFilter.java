@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Set;
 
-//@Order(1)
-//@Component
+@Order(1)
+@Component
 public class StaticResourceFilter implements Filter {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

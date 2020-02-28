@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Set;
 
-//@Order(2)
-//@Component
+@Order(2)
+@Component
 public class LoginFilter implements Filter {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
