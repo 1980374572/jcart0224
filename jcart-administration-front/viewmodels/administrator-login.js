@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         username: '',
-        password: ''
+        password: '',
     },
     mounted() {
       
@@ -20,9 +20,10 @@ var app = new Vue({
                 }
             })
             .then(res => {
-                sessionStorage.setItem("jcartToken", res.data.token);
                 alert('登录成功');
-                location.href="product-search.html";     
+                localStorage['jcartToken'] = res.data.token;
+                localStorage['expireTimestamp'] = res.data.expireTimestamp;
+                location.href="product-search.html";         
             })
             .catch(function (error) {
                 console.log(error);
