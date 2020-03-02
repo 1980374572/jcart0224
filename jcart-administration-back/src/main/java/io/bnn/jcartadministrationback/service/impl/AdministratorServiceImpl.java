@@ -9,6 +9,8 @@ import io.bnn.jcartadministrationback.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
 
@@ -35,5 +37,20 @@ public class AdministratorServiceImpl implements AdministratorService {
         PageHelper.startPage(pageNum,10);
         Page<Administrator> page = administratorMapper.getList();
         return page;
+    }
+
+    @Override
+    public Integer create(Administrator administrator) {
+        return administratorMapper.insertSelective(administrator);
+    }
+
+    @Override
+    public void delete(Integer adminstratorId) {
+        administratorMapper.deleteByPrimaryKey(adminstratorId);
+    }
+
+    @Override
+    public void batchDelete(List<Integer> administratorIds) {
+        administratorMapper.batchDelete(administratorIds);
     }
 }

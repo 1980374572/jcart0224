@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import io.bnn.jcartadministrationback.constant.ClientExceptionConstant;
 import io.bnn.jcartadministrationback.dto.in.*;
 import io.bnn.jcartadministrationback.dto.out.*;
+import io.bnn.jcartadministrationback.enumeration.AdministratorStatus;
 import io.bnn.jcartadministrationback.exception.ClientException;
 import io.bnn.jcartadministrationback.po.Administrator;
 import io.bnn.jcartadministrationback.service.AdministratorService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -114,37 +116,70 @@ public class AdministratorController {
 
     @GetMapping("/getById")
     public AdministratorShowOutDTO getById(
-            @RequestParam Integer administratorId
+            @RequestParam(required = false) Integer administratorId
     ){
-        return null;
+        Administrator administrator = administratorService.getById(administratorId);
+
+        AdministratorShowOutDTO administratorShowOutDTO = new AdministratorShowOutDTO();
+        administratorShowOutDTO.setAdministratorId(administrator.getAdministratorId());
+        administratorShowOutDTO.setUsername(administrator.getUsername());
+        administratorShowOutDTO.setRealName(administrator.getRealName());
+        administratorShowOutDTO.setEmail(administrator.getEmail());
+        administratorShowOutDTO.setAvatarUrl(administrator.getAvatarUrl());
+        administratorShowOutDTO.setStatus(administrator.getStatus());
+        return administratorShowOutDTO;
     }
 
     @PostMapping("/create")
     public Integer create(
-            @RequestBody AdministratorCreateInDTO administratorCreateInDT
+            @RequestBody AdministratorCreateInDTO administratorCreateInDTO
     ){
-        return null;
+        Administrator administrator = new Administrator();
+        administrator.setUsername(administratorCreateInDTO.getUsername());
+        administrator.setRealName(administratorCreateInDTO.getRealName());
+        administrator.setEmail(administratorCreateInDTO.getEmail());
+        administrator.setAvatarUrl(administratorCreateInDTO.getAvatarUrl());
+        administrator.setStatus((byte) AdministratorStatus.Enable.ordinal());
+        administrator.setCreateTime(new Date());
+
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, administratorCreateInDTO.getPassword().toCharArray());
+        administrator.setEncryptedPassword(bcryptHashString);
+
+        Integer administratorId = administratorService.create(administrator);
+
+        return administratorId;
     }
 
     @PostMapping("/update")
     public void update(
             @RequestBody AdministratorUpdateInDTO administratorUpdateInDTO
     ){
-
+        Administrator administrator = new Administrator();
+        administrator.setAdministratorId(administratorUpdateInDTO.getAdministratorId());
+        administrator.setRealName(administratorUpdateInDTO.getRealName());
+        administrator.setEmail(administratorUpdateInDTO.getEmail());
+        administrator.setAvatarUrl(administratorUpdateInDTO.getAvatarUrl());
+        administrator.setStatus(administratorUpdateInDTO.getStatus());
+        String password = administratorUpdateInDTO.getPassword();
+        if (password != null && !password.isEmpty()){
+            String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+            administrator.setEncryptedPassword(bcryptHashString);
+        }
+        administratorService.update(administrator);
     }
 
     @PostMapping("/delete")
     public void delete(
             @RequestBody Integer adminstratorId
     ){
-
+        administratorService.delete(adminstratorId);
     }
 
     @PostMapping("/batchDelete")
     public void batchDelete(
             @RequestBody List<Integer> administratorIds
     ){
-
+        administratorService.batchDelete(administratorIds);
     }
 
     @GetMapping("/test")

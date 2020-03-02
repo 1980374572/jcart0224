@@ -3,6 +3,7 @@ package io.bnn.jcartadministrationback.dto.out;
 public class AdministratorShowOutDTO {
     private Integer administratorId;
     private String username;
+    private String realName;
     private String email;
     private String avatarUrl;
     private Byte status;
@@ -21,6 +22,14 @@ public class AdministratorShowOutDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getEmail() {

@@ -1,8 +1,9 @@
 package io.bnn.jcartadministrationback.service;
 
 import com.github.pagehelper.Page;
-import io.bnn.jcartadministrationback.dto.in.AdministratorLoginInDTO;
 import io.bnn.jcartadministrationback.po.Administrator;
+
+import java.util.List;
 
 public interface AdministratorService {
 
@@ -13,4 +14,10 @@ public interface AdministratorService {
     void update(Administrator administrator);
 
     Page<Administrator> getList(Integer pageNum);
+
+    Integer create(Administrator administrator);
+
+    void delete(Integer adminstratorId);
+
+    void batchDelete(List<Integer> administratorIds);
 }

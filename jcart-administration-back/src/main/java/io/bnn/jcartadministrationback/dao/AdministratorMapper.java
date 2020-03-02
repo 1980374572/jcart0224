@@ -5,6 +5,8 @@ import io.bnn.jcartadministrationback.dto.in.AdministratorLoginInDTO;
 import io.bnn.jcartadministrationback.po.Administrator;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdministratorMapper {
     int deleteByPrimaryKey(Integer administratorId);
@@ -22,4 +24,6 @@ public interface AdministratorMapper {
     Administrator getByUsername(String username);
 
     Page<Administrator> getList();
+
+    void batchDelete(List<Integer> administratorIds);
 }
