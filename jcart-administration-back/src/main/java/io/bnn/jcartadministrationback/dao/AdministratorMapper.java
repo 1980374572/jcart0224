@@ -1,5 +1,6 @@
 package io.bnn.jcartadministrationback.dao;
 
+import com.github.pagehelper.Page;
 import io.bnn.jcartadministrationback.dto.in.AdministratorLoginInDTO;
 import io.bnn.jcartadministrationback.po.Administrator;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,6 @@ public interface AdministratorMapper {
     int updateByPrimaryKey(Administrator record);
 
     Administrator getByUsername(String username);
+
+    Page<Administrator> getList();
 }

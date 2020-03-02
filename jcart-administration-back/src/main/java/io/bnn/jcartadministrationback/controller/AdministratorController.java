@@ -1,6 +1,7 @@
 package io.bnn.jcartadministrationback.controller;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.github.pagehelper.Page;
 import io.bnn.jcartadministrationback.constant.ClientExceptionConstant;
 import io.bnn.jcartadministrationback.dto.in.*;
 import io.bnn.jcartadministrationback.dto.out.*;
@@ -11,7 +12,9 @@ import io.bnn.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/administrator")
@@ -78,15 +81,35 @@ public class AdministratorController {
     }
 
     @PostMapping("/resetPwd")
-    public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO){
+    public void resetPwd(
+            @RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO
+    ){
 
     }
 
     @GetMapping("/getList")
     public PageOutDTO<AdministratorListOutDTO> getList(
-            @RequestParam Integer pageNum
+            @RequestParam(required = false,defaultValue = "1") Integer pageNum
     ){
-        return null;
+        Page<Administrator> page = administratorService.getList(pageNum);
+
+        List<AdministratorListOutDTO> administratorListOutDTOS = page.stream().map(administrator -> {
+            AdministratorListOutDTO administratorListOutDTO = new AdministratorListOutDTO();
+            administratorListOutDTO.setAdministratorId(administrator.getAdministratorId());
+            administratorListOutDTO.setUsername(administrator.getUsername());
+            administratorListOutDTO.setRealName(administrator.getRealName());
+            administratorListOutDTO.setStatus(administrator.getStatus());
+            administratorListOutDTO.setCreateTimestamp(administrator.getCreateTime().getTime());
+            return administratorListOutDTO;
+        }).collect(Collectors.toList());
+
+        PageOutDTO<AdministratorListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(administratorListOutDTOS);
+
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")

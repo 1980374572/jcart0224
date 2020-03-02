@@ -3,6 +3,7 @@ package io.bnn.jcartadministrationback.dto.out;
 public class AdministratorListOutDTO {
     private Integer administratorId;
     private String username;
+    private String realName;
     private Byte status;
     private Long createTimestamp;
 
@@ -20,6 +21,15 @@ public class AdministratorListOutDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public Byte getStatus() {
