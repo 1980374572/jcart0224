@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/return")
+@CrossOrigin
 public class ReturnController {
 
     @PostMapping("/apply")

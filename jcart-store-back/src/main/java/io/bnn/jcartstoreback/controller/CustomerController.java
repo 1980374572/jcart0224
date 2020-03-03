@@ -2,17 +2,33 @@ package io.bnn.jcartstoreback.controller;
 
 import io.bnn.jcartstoreback.dto.in.*;
 import io.bnn.jcartstoreback.dto.out.CustomerGetProfileOutDTO;
+import io.bnn.jcartstoreback.service.CustomerService;
+import io.bnn.jcartstoreback.util.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.SecureRandom;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin
 public class CustomerController {
 
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private JWTUtil jwtUtil;
+
     @PostMapping("/register")
-    public String register(
+    public Integer register(
             @RequestBody CustomerRegisterInDTO customerRegisterInDTO
     ){
-        return null;
+        Integer customerId = customerService.register(customerRegisterInDTO);
+        return customerId;
     }
 
     @GetMapping("/login")
