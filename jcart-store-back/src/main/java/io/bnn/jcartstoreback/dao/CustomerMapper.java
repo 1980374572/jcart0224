@@ -18,4 +18,6 @@ public interface CustomerMapper {
     int updateByPrimaryKey(Customer record);
 
     Customer getByUsername(String username);
+
+    Customer getByEmail(String email);
 }

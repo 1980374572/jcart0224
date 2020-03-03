@@ -46,4 +46,21 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.getByUsername(username);
         return customer;
     }
+
+    @Override
+    public Customer getById(Integer customerId) {
+        Customer customer = customerMapper.selectByPrimaryKey(customerId);
+        return customer;
+    }
+
+    @Override
+    public void update(Customer customer) {
+        customerMapper.insertSelective(customer);
+    }
+
+    @Override
+    public Customer getByEmail(String email) {
+        Customer customer = customerMapper.getByEmail(email);
+        return customer;
+    }
 }

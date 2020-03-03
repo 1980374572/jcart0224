@@ -37,24 +37,24 @@ public class JWTUtil {
         long nowTimestamp = now.getTime();
         long expireTimestamp = nowTimestamp + jwtValidDuration;
         Date expireTime = new Date(expireTimestamp);
-        Integer administratorId = customer.getCustomerId();
+        Integer customerId = customer.getCustomerId();
         String username = customer.getUsername();
 
         String token = JWT.create()
                 .withIssuer(issuer)
                 .withIssuedAt(now)
                 .withSubject(username)
-                .withClaim("administratorId", administratorId)
+                .withClaim("customerId", customerId)
                 .withExpiresAt(expireTime)
                 .sign(algorithm);
 
         logger.info("jwt token: {}", token);
         logger.info("jwt expire date: {}", expireTimestamp);
-        CustomerLoginOutDTO administratorLoginOutDTO = new CustomerLoginOutDTO();
-        administratorLoginOutDTO.setToken(token);
-        administratorLoginOutDTO.setExpireTimestamp(expireTimestamp);
+        CustomerLoginOutDTO customerLoginOutDTO = new CustomerLoginOutDTO();
+        customerLoginOutDTO.setToken(token);
+        customerLoginOutDTO.setExpireTimestamp(expireTimestamp);
 
-        return administratorLoginOutDTO;
+        return customerLoginOutDTO;
     }
 
     public CustomerLoginVO verifyToken(String token) {
