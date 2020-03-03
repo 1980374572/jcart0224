@@ -1,7 +1,12 @@
 package io.bnn.jcartstoreback.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import io.bnn.jcartstoreback.constant.ClientExceptionConstant;
 import io.bnn.jcartstoreback.dto.in.*;
 import io.bnn.jcartstoreback.dto.out.CustomerGetProfileOutDTO;
+import io.bnn.jcartstoreback.dto.out.CustomerLoginOutDTO;
+import io.bnn.jcartstoreback.exception.ClientException;
+import io.bnn.jcartstoreback.po.Customer;
 import io.bnn.jcartstoreback.service.CustomerService;
 import io.bnn.jcartstoreback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +37,23 @@ public class CustomerController {
     }
 
     @GetMapping("/login")
-    public String login(
+    public CustomerLoginOutDTO login(
             CustomerLoginInDTO customerLoginInDTO
-    ){
-        return null;
+    ) throws ClientException {
+        Customer customer = customerService.getByUsername(customerLoginInDTO.getUsername());
+        if (customer == null){
+            throw new ClientException(ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRMSG);
+        }
+        //解密
+        String encPwdDB = customer.getEncryptedPassword();
+        BCrypt.Result result = BCrypt.verifyer().verify(customerLoginInDTO.getPassword().toCharArray(), encPwdDB);
+
+        if (result.verified) {
+            CustomerLoginOutDTO customerLoginOutDTO = jwtUtil.issueToken(customer);
+            return customerLoginOutDTO;
+        }else {
+            throw new ClientException(ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRMSG);
+        }
     }
 
     @GetMapping("/getProfile")
