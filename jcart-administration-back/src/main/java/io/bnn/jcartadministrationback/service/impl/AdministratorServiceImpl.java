@@ -3,7 +3,6 @@ package io.bnn.jcartadministrationback.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.bnn.jcartadministrationback.dao.AdministratorMapper;
-import io.bnn.jcartadministrationback.dto.in.AdministratorLoginInDTO;
 import io.bnn.jcartadministrationback.po.Administrator;
 import io.bnn.jcartadministrationback.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
