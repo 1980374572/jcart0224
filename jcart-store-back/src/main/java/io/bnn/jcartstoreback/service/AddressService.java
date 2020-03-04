@@ -8,4 +8,6 @@ public interface AddressService {
     List<Address> getByCustomerId(Integer customerId);
 
     void create(Address address);
+
+    Address getById(Integer shipAddressId);
 }

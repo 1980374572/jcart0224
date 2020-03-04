@@ -23,4 +23,10 @@ public class AddressServiceImpl implements AddressService {
     public void create(Address address) {
         addressMapper.insertSelective(address);
     }
+
+    @Override
+    public Address getById(Integer shipAddressId) {
+        Address address = addressMapper.selectByPrimaryKey(shipAddressId);
+        return address;
+    }
 }

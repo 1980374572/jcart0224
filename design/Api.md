@@ -17,7 +17,7 @@
 
 
 URL: /product/search?product_name={product_name}&product_code={product_code}&price={price}&quantity={quantity}&status={status}&pageNum={pageNum}
-Method：POST  
+Method：GET  
 
 {
     total:10,
