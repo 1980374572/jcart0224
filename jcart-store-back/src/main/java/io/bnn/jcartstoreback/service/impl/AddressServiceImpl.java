@@ -29,4 +29,14 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressMapper.selectByPrimaryKey(shipAddressId);
         return address;
     }
+
+    @Override
+    public void update(Address address) {
+        addressMapper.updateByPrimaryKeySelective(address);
+    }
+
+    @Override
+    public void delete(Integer addressId) {
+        addressMapper.deleteByPrimaryKey(addressId);
+    }
 }

@@ -10,4 +10,8 @@ public interface AddressService {
     void create(Address address);
 
     Address getById(Integer shipAddressId);
+
+    void update(Address address);
+
+    void delete(Integer addressId);
 }
