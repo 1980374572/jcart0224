@@ -3,6 +3,11 @@ var app = new Vue({
     data: {
         pageInfo: '',
         pageNum: 1,
+        username: '',
+        mobile: '',
+        email: '',
+        status: '',
+        realName: '',
         statuses: [
             { value: 0, label: '禁用' },
             { value: 1, label: '启用' },
@@ -26,7 +31,12 @@ var app = new Vue({
         searchCustomer() {
             axios.get('/customer/search', {
                 params: {
-                    pageNum: this.pageNum
+                    pageNum: this.pageNum,
+                    username: this.username,
+                    mobile: this.mobile,
+                    email: this.email,
+                    status: this.status,
+                    realName: this.realName,
                 }
             })
                 .then(function (response) {
@@ -49,6 +59,19 @@ var app = new Vue({
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        handleSearchClick(){
+            this.pageNum = 1;
+            this.searchCustomer();
+        },
+        handleClearClick(){
+            this.username = '';
+            this.mobile = '';
+            this.email = '';
+            this.status = '';
+            this.realName = '';
+            this.pageNum = 1;
+            this.searchCustomer();
         }
     }
 })
