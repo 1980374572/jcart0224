@@ -2,7 +2,10 @@ package io.bnn.jcartadministrationback.dao;
 
 import com.github.pagehelper.Page;
 import io.bnn.jcartadministrationback.po.Return;
+import io.bnn.jcartadministrationback.po.ReturnHistory;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ReturnMapper {
@@ -19,4 +22,5 @@ public interface ReturnMapper {
     int updateByPrimaryKey(Return record);
 
     Page<Return> search();
+
 }

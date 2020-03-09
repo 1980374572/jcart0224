@@ -238,4 +238,5 @@
     <include refid="Base_Column_List" />
     from jcart_return
   </select>
+
 </mapper>
