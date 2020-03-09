@@ -143,6 +143,8 @@ public class AdministratorController {
 
         administrator.setEncryptedPassword(hashToString);
         administratorService.update(administrator);
+        //决定了接口的安全性
+        emailPwdResetCodeMap.remove(email);
     }
 
     @GetMapping("/getList")
