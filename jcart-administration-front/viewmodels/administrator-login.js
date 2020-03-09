@@ -23,7 +23,7 @@ var app = new Vue({
                 alert('登录成功');
                 localStorage['jcartToken'] = res.data.token;
                 localStorage['expireTimestamp'] = res.data.expireTimestamp;
-                location.href="product-search.html";         
+                // location.href="product-search.html";         
             })
             .catch(function (error) {
                 console.log(error);
