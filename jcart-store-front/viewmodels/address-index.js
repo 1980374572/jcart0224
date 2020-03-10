@@ -9,7 +9,7 @@ var app = new Vue({
     },
     methods: {
         getMyAddresses() {
-            axios.get('/address/getCustomerAddress')
+            axios.get('/address/getAddressByCustomerId')
                 .then(function (response) {
                     console.log(response);
                     app.addresses = response.data;

@@ -3,6 +3,7 @@ package io.bnn.jcartstoreback.controller;
 import io.bnn.jcartstoreback.dto.in.AddressCreateInDTO;
 import io.bnn.jcartstoreback.dto.in.AddressUpdateInDTO;
 import io.bnn.jcartstoreback.dto.out.AddressListOutDTO;
+import io.bnn.jcartstoreback.dto.out.AddressShowOutDTO;
 import io.bnn.jcartstoreback.po.Address;
 import io.bnn.jcartstoreback.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,21 @@ public class AddressController {
             return addressListOutDTO;
         }).collect(Collectors.toList());
         return addressListOutDTOS;
+    }
+
+    @GetMapping("/getById")
+    public AddressShowOutDTO getById(
+            @RequestParam Integer addressId
+    ){
+        Address address = addressService.getById(addressId);
+        AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
+        addressShowOutDTO.setAddressId(address.getAddressId());
+        addressShowOutDTO.setTag(address.getTag());
+        addressShowOutDTO.setReceiverName(address.getReceiverName());
+        addressShowOutDTO.setReceiverMobile(address.getReceiverMobile());
+        addressShowOutDTO.setContent(address.getContent());
+
+        return addressShowOutDTO;
     }
 
     @PostMapping("/create")

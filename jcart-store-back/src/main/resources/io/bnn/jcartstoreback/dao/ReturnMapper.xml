@@ -233,7 +233,7 @@
     where return_id = #{returnId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectPageByCustomerId" resultMap="BaseResultMap">
+  <select id="getPageByCustomerId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from jcart_return
