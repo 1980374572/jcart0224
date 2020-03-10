@@ -37,6 +37,7 @@ public class Return {
 
     private Date updateTime;
 
+
     public Integer getReturnId() {
         return returnId;
     }
