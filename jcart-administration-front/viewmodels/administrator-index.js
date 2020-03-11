@@ -27,6 +27,9 @@ var app = new Vue({
                 this.deleteAdministrator(row.administratorId);
             }
         },
+        handleUpdate(index, row){
+            location.href="administrator-update.html?administratorId="+row.administratorIdd;   
+        },
         handleBatchDeleteClick() {
             console.log('batch delete click');
             if (confirm("确认删除？")) {
@@ -76,6 +79,7 @@ var app = new Vue({
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        },
+       
     }
 })

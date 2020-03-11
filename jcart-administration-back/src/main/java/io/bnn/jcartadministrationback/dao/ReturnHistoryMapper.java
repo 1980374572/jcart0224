@@ -19,5 +19,5 @@ public interface ReturnHistoryMapper {
 
     int updateByPrimaryKey(ReturnHistory record);
 
-    List<ReturnHistory> getListByReturnId(Integer returnId);
+    List<ReturnHistory> getListByReturnId(Long returnId);
 }

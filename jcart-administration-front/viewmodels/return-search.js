@@ -27,6 +27,12 @@ var app = new Vue({
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        },
+        handleByreturnId(index,row){
+            location.href = "return-show.html?returnId="+row.returnId;
+        },
+        handleReturn(index,row){
+            location.href = "returnhistory-index.html?returnId="+row.returnId;
+        },
     }
 })

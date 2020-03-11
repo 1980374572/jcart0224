@@ -23,7 +23,7 @@ public class ReturnHistoryServiceImpl implements ReturnHistoryService {
     private ReturnService returnService;
 
     @Override
-    public List<ReturnHistory> getListByReturnId(Integer returnId) {
+    public List<ReturnHistory> getListByReturnId(Long returnId) {
         List<ReturnHistory> returnHistories = returnHistoryMapper.getListByReturnId(returnId);
         return returnHistories;
     }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+<body>
+<div id="app">
+
+  <el-container style="height: 800px; border: 1px solid rgb(255, 255, 255)">
+    <el-aside width="205px" style="background-color: rgb(255, 255, 255)">
+    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;" router="ture">
+      </el-radio-group>
+      <el-menu default-active="1-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-s-custom"></i>
+            <span slot="title">管理员管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="(item,i) in administratorList" :key="i" :index="item.name" @click="goHtml(item.name)">
+              {{ item.navItem }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="(item,i) in customerList" :key="i" :index="item.name" @click="goHtml(item.name)">
+              {{ item.navItem }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-goods"></i>
+            <span slot="title">商品管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="(item,i) in productList" :key="i" :index="item.name" @click="goHtml(item.name)">
+              {{ item.navItem }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="4">
+          <template slot="title">
+            <i class="el-icon-s-order"></i>
+            <span slot="title">订单管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="(item,i) in orderList" :key="i" :index="item.name" @click="goHtml(item.name)">
+              {{ item.navItem }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="5">
+          <template slot="title">
+            <i class="el-icon-s-release"></i>
+            <span slot="title">退款管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="(item,i) in returnList" :key="i" :index="item.name" @click="goHtml(item.name)">
+              {{ item.navItem }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+
+    <el-container>
+      
+      <iframe :src="aHtml" width="1500px" height="800px" frameborder="0" scrolling="auto" ></iframe>
+    </el-container>
+  </el-container>
+</div>
+
+<script src="assets/js/axios.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/elementui.js"></script>
+<script src="viewmodels/index-index.js"></script>
+
+</body>
+
+</html>
+<style>
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
+      width: 200px;
+      min-height: 400px;
+    }
+  </style>

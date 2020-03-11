@@ -47,6 +47,9 @@ public class AdministratorController {
     ) throws ClientException {
         Administrator administrator = administratorService.getByUsername(administratorLoginInDTO.getUsername());
         if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_ABNORMAL_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_USERNAME_ABNORMAL_ERRMSG);
+        }
+        if (administrator.getStatus() != 1){
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRMSG);
         }
         String encPwdDB = administrator.getEncryptedPassword();

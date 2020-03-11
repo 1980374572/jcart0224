@@ -21,7 +21,7 @@ public class ReturnHistoryController {
 
     @GetMapping("/getListByReturnId")
     public List<ReturnHistoryListOutDTO> getListByReturnId(
-            @RequestParam Integer returnId
+            @RequestParam Long returnId
     ){
         List<ReturnHistory> returnHistories = returnHistoryService.getListByReturnId(returnId);
 

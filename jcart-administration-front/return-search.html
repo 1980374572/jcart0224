@@ -28,6 +28,12 @@
             </el-table-column>
             <el-table-column prop="updateTimestamp" label="修改日期">
             </el-table-column>
+            <el-table-column label="操作" style="width: 300px;">
+                <template slot-scope="scope">
+                    <el-button type="primary" size="mini" @click="handleByreturnId(scope.$index, scope.row)">查看信息</el-button>
+                    <el-button type="primary" size="mini" @click="handleReturn(scope.$index, scope.row)">退款历史</el-button>
+                </template>
+            </el-table-column>
         </el-table>
 
         <el-pagination layout="prev, pager, next" :total="pageInfo.total" @current-change="handlePageChange">
