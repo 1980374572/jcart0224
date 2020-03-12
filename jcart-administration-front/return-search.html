@@ -11,6 +11,19 @@
 
 <body>
     <div id="app">
+        <el-select v-model="selectedStatus" placeholder="请选择状态">
+            <el-option v-for="item in statuses" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+        </el-select>
+        <el-date-picker v-model="startTime" type="date" placeholder="选择开始日期">
+        </el-date-picker>
+
+        <el-date-picker v-model="endTime" type="date" placeholder="选择结束日期">
+        </el-date-picker>
+
+        <el-button type="primary" @click="handleSearchClick">搜索</el-button>
+        <el-button type="primary" @click="handleClearClick">清空条件</el-button>
+
         <el-table :data="pageInfo.list" style="width: 100%">
             <el-table-column prop="returnId" label="退货Id">
             </el-table-column>
@@ -23,15 +36,18 @@
             <el-table-column prop="productName" label="商品名称">
             </el-table-column>
             <el-table-column prop="status" label="状态">
-            </el-table-column>
-            <el-table-column prop="createTimestamp" label="申请日期">
-            </el-table-column>
-            <el-table-column prop="updateTimestamp" label="修改日期">
-            </el-table-column>
-            <el-table-column label="操作" style="width: 300px;">
                 <template slot-scope="scope">
-                    <el-button type="primary" size="mini" @click="handleByreturnId(scope.$index, scope.row)">查看信息</el-button>
-                    <el-button type="primary" size="mini" @click="handleReturn(scope.$index, scope.row)">退款历史</el-button>
+                    {{statuses[scope.row.status].label}}
+                </template>
+            </el-table-column>
+            <el-table-column label="申请日期">
+                <template slot-scope="scope">
+                    {{(new Date(scope.row.createTimestamp)).toLocaleString()}}
+                </template>
+            </el-table-column>
+            <el-table-column label="修改日期">
+                <template slot-scope="scope">
+                    {{(new Date(scope.row.updateTimestamp)).toLocaleString()}}
                 </template>
             </el-table-column>
         </el-table>

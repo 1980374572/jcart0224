@@ -8,8 +8,6 @@ public class OrderSearchInDTO {
     private Long startTimestamp;
     private Long endTimestamp;
 
-
-
     public String getCustomerName() {
         return customerName;
     }
