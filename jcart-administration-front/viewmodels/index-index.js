@@ -2,22 +2,6 @@ var app = new Vue({
     el: '#app',
     data: {
         isCollapse: true,
-        administratorList: [
-            {name: '/administrator-index.html',navItem: '管理员列表'},
-            {name: '/administrator-update-profile.html',navItem: '修改个人信息'},
-        ],
-        customerList:[
-            {name: '/customer-search.html',navItem: '用户列表'},
-        ],
-        productList:[
-            {name: '/product-search.html',navItem: '订单列表'},
-        ],
-        orderList:[
-            {name: '/order-search.html',navItem: '订单列表'},
-        ],
-        returnList:[
-            {name: '/return-search.html',navItem: '退款列表'},
-        ],
         aList: [
             {
                 index: '1-1',
