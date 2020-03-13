@@ -17,58 +17,15 @@
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;" router="ture">
       </el-radio-group>
       <el-menu default-active="1-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-        <el-submenu index="1">
+
+        <el-submenu v-for="(aitem,ai) in aList" :key="ai" :index="aitem.index">
           <template slot="title">
-            <i class="el-icon-s-custom"></i>
-            <span slot="title">管理员管理</span>
+            <i :class="aitem.class"></i>
+            <span slot="title">{{aitem.slot}}</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item v-for="(item,i) in administratorList" :key="i" :index="item.name" @click="goHtml(item.name)">
-              {{ item.navItem }}
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-user"></i>
-            <span slot="title">用户管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(item,i) in customerList" :key="i" :index="item.name" @click="goHtml(item.name)">
-              {{ item.navItem }}
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-goods"></i>
-            <span slot="title">商品管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(item,i) in productList" :key="i" :index="item.name" @click="goHtml(item.name)">
-              {{ item.navItem }}
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="4">
-          <template slot="title">
-            <i class="el-icon-s-order"></i>
-            <span slot="title">订单管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(item,i) in orderList" :key="i" :index="item.name" @click="goHtml(item.name)">
-              {{ item.navItem }}
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="5">
-          <template slot="title">
-            <i class="el-icon-s-release"></i>
-            <span slot="title">退款管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(item,i) in returnList" :key="i" :index="item.name" @click="goHtml(item.name)">
-              {{ item.navItem }}
+            <el-menu-item v-for="(bitem,bi) in aitem.bList" :key="bi" :index="bitem.name" @click="goHtml(bitem.name)">
+              {{ bitem.navItem }}
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
