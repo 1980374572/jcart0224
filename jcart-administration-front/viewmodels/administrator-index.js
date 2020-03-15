@@ -28,8 +28,12 @@ var app = new Vue({
                 this.deleteAdministrator(row.administratorId);
             }
         },
-        handleUpdate(index, row){
-            location.href="administrator-update.html?administratorId="+row.administratorIdd;   
+        handleCreateClick(index, row){
+            console.log('create click');
+            this.$router.push('/administrator/create');
+        },
+        handleEdit(index, row) {
+            this.$router.push('/administrator/update/' + row.administratorId);
         },
         handleBatchDeleteClick() {
             console.log('batch delete click');
@@ -80,7 +84,6 @@ var app = new Vue({
                 .catch(function (error) {
                     console.log(error);
                 });
-        },
-       
+        }
     }
 })

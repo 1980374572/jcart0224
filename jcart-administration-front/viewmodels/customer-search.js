@@ -72,6 +72,9 @@ var app = new Vue({
             this.realName = '';
             this.pageNum = 1;
             this.searchCustomer();
-        }
+        },
+        handleShowClick(index, row) {
+            this.$router.push('/customer/show/' + row.customerId);
+        },
     }
 })

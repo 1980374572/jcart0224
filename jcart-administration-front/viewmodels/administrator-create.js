@@ -29,6 +29,7 @@ var app = new Vue({
                 .then(function (response) {
                     console.log(response);
                     alert('创建成功');
+                    this.$router.push('/administrator/index');
                 })
                 .catch(function (error) {
                     console.log(error);
