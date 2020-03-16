@@ -14,37 +14,31 @@ var app = new Vue({
             },
             {
                 index: '2',
+                slot: '商品管理',
+                class: 'el-icon-s-goods',
+                bList:[
+                    {index: '2-1',navItem: '商品列表', route: '/product/search'},               
+                ]
+            },
+            {
+                index: '3',
                 slot: '用户管理',
                 class: 'el-icon-user',
                 bList:[
-                    {index: '2-3',navItem: '用户列表', route: '/customer/search'},                
+                    {index: '3-1',navItem: '用户列表', route: '/customer/search'},                
                 ]
             },
             {
 
-                index: '3',
-                slot: '商品管理',
-                class: 'el-icon-goods',
-                bList:[
-                    {index: '2-4',navItem: '订单列表', route: '/administrator/index'},             
-                ]
-            },
-            {
                 index: '4',
                 slot: '订单管理',
                 class: 'el-icon-s-order',
                 bList:[
-                    {index: '4-5',navItem: '订单列表', route: '/administrator/index'},               
+                    {index: '4-1',navItem: '订单列表', route: '/order/search'},  
+                    {index: '4-2',navItem: '退货列表', route: '/return/search'}           
                 ]
             },
-            {
-                index: '5',
-                slot: '退款管理',
-                class: 'el-icon-s-release',
-                bList:[
-                    {index: '5-6',navItem: '退款列表', route: '/administrator/index'},                
-                ]
-            }
+            
         ],
         my: [
             { name: "个人信息", route: "/administrator/updateprofile", divided: false },

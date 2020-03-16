@@ -2,61 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/elementui.css">
-    <!-- <link rel="stylesheet" href="assets/css/custom.css"> -->
-    <title>menu-navigate</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/css/elementui.css">
+  <!-- <link rel="stylesheet" href="assets/css/custom.css"> -->
+  <title>menu-navigate</title>
 </head>
 
 <body>
-<div id="app">
-  <el-header style="text-align: left; font-size: 12px; background-color: #409EFF">
-    <br>
-    <span style="font-size: 20px;">Jcart</span>
+  <div id="app">
+    <el-header style="text-align: left; font-size: 12px; background-color: #409EFF">
+      <br>
+      <span style="font-size: 20px;">Jcart</span>
 
-    <el-dropdown style="float: right;" @command="handleMyItemClick">
-      <span class="el-dropdown-link">
+      <el-dropdown style="float: right;" @command="handleMyItemClick">
+        <span class="el-dropdown-link">
           我的<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-for="item in my" :key="item.route" :divided="item.divided" :command="item.route">{{item.name}}</el-dropdown-item>
-      </el-dropdown-menu>
-  </el-dropdown>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item v-for="item in my" :key="item.route" :divided="item.divided" :command="item.route">
+            {{item.name}}</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
     </el-header>
 
-  <el-container style="height: 800px; border: 1px solid rgb(255, 255, 255)">
-    <el-aside width="auto" style="background-color: rgb(255, 255, 255)">
+    <el-container style="height: 800px; border: 1px solid rgb(255, 255, 255)">
+      <el-aside width="auto" style="background-color: rgb(255, 255, 255)">
 
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;" router="ture">
-      <el-radio-button :label="false">开</el-radio-button>
-      <el-radio-button :label="true">关</el-radio-button>
-      </el-radio-group>
+        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;" router="ture">
+          <el-radio-button :label="false">开</el-radio-button>
+          <el-radio-button :label="true">关</el-radio-button>
+        </el-radio-group>
 
-      <el-menu unique-opened router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-        <el-submenu v-for="(aitem,ai) in aList" :key="ai" :index="aitem.index">
-          <template slot="title">
-            <i :class="aitem.class"></i>
-            <span slot="title">{{aitem.slot}}</span>
-          </template>
+        <el-menu unique-opened router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+          :collapse="isCollapse">
+          <el-submenu v-for="(aitem,ai) in aList" :key="ai" :index="aitem.index">
+            <template slot="title">
+              <i :class="aitem.class"></i>
+              <span slot="title">{{aitem.slot}}</span>
+            </template>
             <!-- @click="goHtml(bitem.name)" -->
             <el-menu-item v-for="(bitem,bi) in aitem.bList" :key="bi" :index="bitem.index" :route="bitem.route">
               {{ bitem.navItem }}
             </el-menu-item>
-        </el-submenu>
-      </el-menu>
-    </el-aside>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
 
-    <el-main>
-      <router-view></router-view>
-  </el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
       <!-- <el-container>
       <iframe :src="aHtml" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>
       </el-container> -->
-  </el-container>
-</div>
+    </el-container>
+  </div>
 
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/js/axios.min.js"></script>
@@ -70,11 +72,23 @@
   <script src="route-page/administrator-create-route-page.js"></script>
   <script src="route-page/administrator-update-route-page.js"></script>
   <script src="route-page/administrator-update-profile-route-page.js"></script>
-   <!-- customer -->
-   <script src="route-page/customer-search-route-page.js"></script>
-   <script src="route-page/customer-show-route-page.js"></script>
-   <script src="route-page/address-index-route-page.js"></script>
-   <script src="route-page/address-show-route-page.js"></script>
+  <!-- customer -->
+  <script src="route-page/customer-search-route-page.js"></script>
+  <script src="route-page/customer-show-route-page.js"></script>
+  <script src="route-page/address-index-route-page.js"></script>
+  <script src="route-page/address-show-route-page.js"></script>
+  <!-- product -->
+  <script src="route-page/product-search-route-page.js"></script>
+  <script src="route-page/product-create-route-page.js"></script>
+  <script src="route-page/product-update-route-page.js"></script>
+  <!-- order -->
+  <script src="route-page/order-search-route-page.js"></script>
+  <script src="route-page/order-show-route-page.js"></script>
+  <!-- return -->
+  <script src="route-page/return-search-route-page.js"></script>
+  <script src="route-page/return-edit-route-page.js"></script>
+  <script src="route-page/return-show-route-page.js"></script>
+  <script src="route-page/returnhistory-index-route-page.js"></script>
 
   <script src="route-page/router.js"></script>
 
@@ -84,8 +98,8 @@
 
 </html>
 <style>
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 200px;
-      min-height: 400px;
-    }
-  </style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+</style>
