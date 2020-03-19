@@ -25,9 +25,9 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+build/s
 
 ### VS Code ###
 .vscode/
 www/
-src/main/resources/application-exclude.properties
+/src/main/resources/application-exclude.properties
