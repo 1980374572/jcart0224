@@ -102,7 +102,7 @@ public class AdministratorController {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
-//    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
+    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
 
     @GetMapping("/getPwdResetCode")
     public void getPwdResetCode(
@@ -115,11 +115,8 @@ public class AdministratorController {
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
         emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", "验证码："+hex+"     (请在60s内完成操作！)");
-
         //todo send messasge to MQ
-//        emailPwdResetCodeMap.put(email, hex);
-        redisTemplate.opsForValue().set("EmailReset"+email,hex,1L, TimeUnit.MINUTES);
-
+        emailPwdResetCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
@@ -130,8 +127,8 @@ public class AdministratorController {
         if (email == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
         }
-//        String innerResetCode = emailPwdResetCodeMap.get(email);
-        String innerResetCode = redisTemplate.opsForValue().get("EmailReset" + email);
+        String innerResetCode = emailPwdResetCodeMap.get(email);
+
 
         if (innerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRMSG);
