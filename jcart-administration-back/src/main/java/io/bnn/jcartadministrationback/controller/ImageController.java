@@ -2,6 +2,7 @@ package io.bnn.jcartadministrationback.controller;
 
 import io.bnn.jcartadministrationback.constant.ClientExceptionConstant;
 import io.bnn.jcartadministrationback.exception.ClientException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,12 +17,13 @@ import java.util.UUID;
 @CrossOrigin
 public class ImageController {
 
+    @Value("${www.image.baseurl}")
+    private String imageBaseurl;
+
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
 
     @PostMapping("/upload")
-    public String upload(
-            @RequestParam MultipartFile image
-    )  throws IOException, ClientException {
+    public String upload(@RequestParam MultipartFile image) throws IOException, ClientException {
         String originalFilename = image.getOriginalFilename();
         String[] splits = originalFilename.split("\\.");
         String ext = splits[splits.length - 1];
@@ -31,13 +33,14 @@ public class ImageController {
         if (!contains){
             throw new ClientException(ClientExceptionConstant.IMAGE_INVALID_ERRCODE, ClientExceptionConstant.IMAGE_INVALID_ERRMSG);
         }
-        UUID uuid = UUID.randomUUID();
+        String uuid = UUID.randomUUID().toString();
         String filename = String.format("%s.%s", uuid, ext);
         String filepath = String.format("www/image/%s", filename);
         try(FileOutputStream out = new FileOutputStream(filepath)){
             byte[] data = image.getBytes();
             out.write(data);
         }
-        return filename;
+        return imageBaseurl + "/" + filename;
     }
+
 }
